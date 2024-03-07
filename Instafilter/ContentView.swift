@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var intensity = 0.5
     @State private var selectedItem: PhotosPickerItem?
     @State private var showingFilters = false
+    @State private var scale = 5.0
+    @State private var radius = 10.0
     
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     
@@ -44,14 +46,36 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                HStack{
-                    Text("Intensity")
-                    Slider(value: $intensity)
-                        .onChange(of: intensity, applyProcess)
+                if isEnableIntensity() {
+                    HStack{
+                        Text("Intensity")
+                        Slider(value: $intensity)
+                            .onChange(of: intensity, applyProcess)
+                            .disabled(processedImage == nil)
+                    }
+                }
+
+                if isEnableScale() {
+                    HStack{
+                        Text("Scale")
+                        Slider(value: $scale, in: 0...10)
+                            .onChange(of: scale, applyProcess)
+                            .disabled(processedImage == nil || !isEnableScale())
+                    }
+                }
+
+                if isEnableRadius() {
+                    HStack{
+                        Text("Radius")
+                        Slider(value: $radius, in: 0...50)
+                            .onChange(of: radius, applyProcess)
+                            .disabled(processedImage == nil || !isEnableRadius())
+                    }
                 }
                 
                 HStack {
                     Button("Change Filter",action: changeFilter)
+                        .disabled(processedImage == nil)
                     
                     Spacer()
                     
@@ -67,6 +91,10 @@ struct ContentView: View {
                 Button("Crystallize"){setFilter(CIFilter.crystallize())}
                 Button("Edges"){setFilter(CIFilter.edges())}
                 Button("Gaussian Blur"){setFilter(CIFilter.gaussianBlur())}
+                Button("Motion Blur"){setFilter(CIFilter.motionBlur())}
+                Button("Bloom") { setFilter(CIFilter.bloom())}
+                Button("Comic") { setFilter(CIFilter.comicEffect())}
+                Button("Gabor Gradients") {setFilter(CIFilter.gaborGradients())}
                 Button("Pixellate"){setFilter(CIFilter.pixellate())}
                 Button("Sepia Tone"){setFilter(CIFilter.sepiaTone())}
                 Button("Unsharp Mask"){setFilter(CIFilter.unsharpMask())}
@@ -80,17 +108,27 @@ struct ContentView: View {
         showingFilters.toggle()
     }
     
+    func isEnableRadius() -> Bool {
+        return currentFilter.inputKeys.contains(kCIInputRadiusKey)
+    }
+    
+    func isEnableIntensity() -> Bool {
+        return currentFilter.inputKeys.contains(kCIInputIntensityKey)
+    }
+    
+    func isEnableScale() -> Bool {
+        return currentFilter.inputKeys.contains(kCIInputScaleKey)
+    }
+    
     func applyProcess(){
-        let inputKey = currentFilter.inputKeys
-        
-        if inputKey.contains(kCIInputIntensityKey){
+        if isEnableIntensity() {
             currentFilter.setValue(intensity, forKey: kCIInputIntensityKey)
         }
-        if inputKey.contains(kCIInputRadiusKey){
-            currentFilter.setValue(intensity * 200, forKey: kCIInputRadiusKey)
+        if isEnableRadius() {
+            currentFilter.setValue(radius, forKey: kCIInputRadiusKey)
         }
-        if inputKey.contains(kCIInputScaleKey){
-            currentFilter.setValue(intensity * 10, forKey: kCIInputScaleKey)
+        if isEnableScale() {
+            currentFilter.setValue(scale, forKey: kCIInputScaleKey)
         }
         
         guard let outputImage = currentFilter.outputImage else {return}

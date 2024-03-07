@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		572439F72B998110006F4766 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		574DC78C2B92C7D100F8C34E /* Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		574DC78F2B92C7D100F8C34E /* InstafilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstafilterApp.swift; sourceTree = "<group>"; };
 		574DC7912B92C7D100F8C34E /* ImageManipulatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManipulatedView.swift; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 				574DC7962B92C7D200F8C34E /* Preview Content */,
 				57BAA7B12B958FDF00D63724 /* PhotoLibrary.swift */,
 				57BAA7B32B95940800D63724 /* ContentView.swift */,
+				572439F72B998110006F4766 /* README.md */,
 			);
 			path = Instafilter;
 			sourceTree = "<group>";
