@@ -80,6 +80,7 @@
 		574DC7832B92C7D100F8C34E = {
 			isa = PBXGroup;
 			children = (
+				572439F72B998110006F4766 /* README.md */,
 				574DC78E2B92C7D100F8C34E /* Instafilter */,
 				574DC7A02B92C7D200F8C34E /* InstafilterTests */,
 				574DC7AA2B92C7D200F8C34E /* InstafilterUITests */,
@@ -107,7 +108,6 @@
 				574DC7962B92C7D200F8C34E /* Preview Content */,
 				57BAA7B12B958FDF00D63724 /* PhotoLibrary.swift */,
 				57BAA7B32B95940800D63724 /* ContentView.swift */,
-				572439F72B998110006F4766 /* README.md */,
 			);
 			path = Instafilter;
 			sourceTree = "<group>";
