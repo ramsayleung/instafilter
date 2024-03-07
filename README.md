@@ -8,5 +8,4 @@ Although you can run your Core Image app in the simulator, don’t be surprised 
 
 ## Demo
 
-![](./img/instafilter_v3.gif)
-
+<img src="./img/instafilter_v3.gif" width="250" height="540">
